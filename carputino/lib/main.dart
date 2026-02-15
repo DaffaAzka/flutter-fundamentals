@@ -1,6 +1,8 @@
-import 'package:carputino/screens/home.dart';
+import 'package:carputino/app_route.dart';
+import 'package:carputino/screens/category_screen.dart';
+import 'package:carputino/screens/home_screen.dart';
+import 'package:carputino/screens/setting_screen.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,9 +15,18 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoApp(
-      title: 'Flutter Demo',
-      theme: CupertinoThemeData(),
-      home: HomeScreen(),
+      title: 'Cupertino App',
+      theme: CupertinoThemeData(
+        primaryColor: CupertinoColors.systemPurple,
+        brightness: Brightness.light,
+      ),
+      initialRoute: AppRoute.home.name,
+      routes: {
+        AppRoute.home.name: (context) => HomeScreen(),
+        AppRoute.category.name: (context) => CategoryScreen(
+          selectedCatgory: ModalRoute.of(context)?.settings.arguments as String,
+        ),
+      },
     );
   }
 }
