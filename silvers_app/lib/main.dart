@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:silvers_app/screens/silver_grid_screen.dart';
 import 'package:silvers_app/screens/silver_screen.dart';
 
 void main() {
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
-      home: SilverScreen(),
+      home: SilverGridScreen(),
     );
   }
 }

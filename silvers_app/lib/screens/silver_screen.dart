@@ -16,13 +16,22 @@ class SilverScreen extends StatelessWidget {
               Container(color: Colors.blue, height: 300.0),
               Container(color: Colors.amber, height: 150.0),
             ],
-          
           ),
           SliverList.builder(
             itemBuilder: (context, index) {
               return ListTile(title: Text("Index $index"));
             },
-            itemCount: 1000,
+            itemCount: 10,
+          ),
+          SliverFixedExtentList(
+            delegate: SliverChildListDelegate([
+              Container(color: Colors.red, height: 150.0),
+              Container(color: Colors.purple, height: 200.0),
+              Container(color: Colors.green, height: 100.0),
+              Container(color: Colors.blue, height: 300.0),
+              Container(color: Colors.amber, height: 150.0),
+            ]),
+            itemExtent: 100,
           ),
         ],
       ),
