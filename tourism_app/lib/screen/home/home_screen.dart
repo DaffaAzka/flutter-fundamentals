@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:navigation_app/model/tourism.dart';
-import 'package:navigation_app/screen/home/tourism_card_widget.dart';
+import 'package:navigation_app/widgets/tourism_card.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
