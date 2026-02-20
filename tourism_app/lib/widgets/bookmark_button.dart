@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:navigation_app/model/tourism.dart';
+import 'package:navigation_app/provider/bookmark_list_provider.dart';
+import 'package:navigation_app/provider/is_bookmark_provider.dart';
+import 'package:provider/provider.dart';
 
 class BookmarkButton extends StatefulWidget {
   const BookmarkButton(this.index, {super.key});
@@ -11,30 +14,33 @@ class BookmarkButton extends StatefulWidget {
 }
 
 class _BookmarkButtonState extends State<BookmarkButton> {
-  bool _isBookmarked = false;
-
   @override
   void initState() {
+    final bookmarkListProvider = context.read<BookmarkListProvider>();
+    final isBookmarkProvider = context.read<IsBookmarkProvider>();
     super.initState();
-    _isBookmarked = bookmarkTourismList.any((e) => e.id == widget.index);
+
+    Future.microtask(() {
+      isBookmarkProvider.isBookmarked = bookmarkListProvider.isBookmarked(widget.index);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      icon: _isBookmarked ? Icon(Icons.bookmark) : Icon(Icons.bookmark_border),
+      icon: context.watch<IsBookmarkProvider>().isBookmarked ? Icon(Icons.bookmark) : Icon(Icons.bookmark_border),
       onPressed: () {
-        setState(() {
-          setState(() {
-            _isBookmarked = !_isBookmarked;
+        final bookmarkListProvider = context.read<BookmarkListProvider>();
+        final isBookmarkProvider = context.read<IsBookmarkProvider>();
+        final isBookmarked = isBookmarkProvider.isBookmarked;
 
-            if (_isBookmarked) {
-              bookmarkTourismList.add(tourismList.firstWhere((e) => e.id == widget.index));
-            } else {
-              bookmarkTourismList.removeWhere((e) => e.id == widget.index);
-            }
-          });
-        });
+        if (!isBookmarked) {
+          bookmarkListProvider.addBookmark(widget.index);
+        } else {
+          bookmarkListProvider.removeBookmark(widget.index);
+        }
+
+        isBookmarkProvider.isBookmarked = !isBookmarked;
       },
     );
   }

@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:navigation_app/model/tourism.dart';
+import 'package:navigation_app/provider/bookmark_list_provider.dart';
 import 'package:navigation_app/screen/home/detail/detail_screen.dart';
 import 'package:navigation_app/screen/home/home_screen.dart';
 import 'package:navigation_app/screen/main_screen.dart';
 import 'package:navigation_app/style/theme/tourism_theme.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(ChangeNotifierProvider(create: (context) => BookmarkListProvider(), child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -23,9 +25,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => MainScreen(),
         '/card': (context) => HomeScreen(),
-        '/detail': (context) => DetailScreen(
-          data: ModalRoute.of(context)?.settings.arguments as Tourism,
-        ),
+        '/detail': (context) => DetailScreen(data: ModalRoute.of(context)?.settings.arguments as Tourism),
       },
     );
   }

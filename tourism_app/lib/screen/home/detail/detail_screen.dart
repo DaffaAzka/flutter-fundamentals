@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:navigation_app/model/tourism.dart';
+import 'package:navigation_app/provider/is_bookmark_provider.dart';
 import 'package:navigation_app/widgets/bookmark_button.dart';
+import 'package:provider/provider.dart';
 
 class DetailScreen extends StatefulWidget {
   const DetailScreen({super.key, required this.data});
@@ -23,7 +25,9 @@ class _DetailScreenState extends State<DetailScreen> {
           },
           icon: Icon(Icons.arrow_back),
         ),
-        actions: [BookmarkButton(widget.data.id)],
+        actions: [
+          ChangeNotifierProvider(create: (context) => IsBookmarkProvider(), child: BookmarkButton(widget.data.id)),
+        ],
       ),
       body: Padding(
         padding: EdgeInsetsGeometry.all(20),
