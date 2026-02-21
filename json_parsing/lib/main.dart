@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:json_parsing/future_data.dart';
+import 'package:json_parsing/screen/home_screen.dart';
 import 'package:json_parsing/try_json.dart';
 
 void main() {
@@ -31,15 +33,28 @@ class MyApp extends StatelessWidget {
         // tested with just a hot reload.
         colorScheme: .fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: Scaffold(
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [Text(TryJson.dynamicJsonParsed())],
-          ),
-        ),
-      ),
+      home: HomeScreen(),
+      // Scaffold(
+      //   body: Center(
+      //     child: Column(
+      //       mainAxisAlignment: MainAxisAlignment.center,
+      //       crossAxisAlignment: CrossAxisAlignment.center,
+      //       children: [
+      //         Text(TryJson.dynamicJsonParsed()),
+      //         TextButton(
+      //           onPressed: () {
+      //             runFuture();
+      //           },
+      //           child: Text("Run the future"),
+      //         ),
+      //       ],
+      //     ),
+      //   ),
+      // ),
     );
+  }
+
+  void runFuture() {
+    FutureData().getData().then((String value) {});
   }
 }
