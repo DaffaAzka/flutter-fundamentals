@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:navigation_app/model/tourism.dart';
+import 'package:navigation_app/data/model/tourism.dart';
 
 class BookmarkListProvider extends ChangeNotifier {
   final List<Tourism> _bookmarkTourismList = [];
@@ -7,7 +7,7 @@ class BookmarkListProvider extends ChangeNotifier {
   List<Tourism> get getBookmarkTourismList => _bookmarkTourismList;
 
   void addBookmark(int id) {
-    _bookmarkTourismList.add(tourismList.firstWhere((e) => e.id == id));
+    // _bookmarkTourismList.add(tourismList.firstWhere((e) => e.id == id));
     notifyListeners();
   }
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:navigation_app/model/tourism.dart';
+import 'package:navigation_app/data/model/tourism.dart';
 
 class TourismCard extends StatelessWidget {
   final Tourism tourism;
@@ -10,7 +10,7 @@ class TourismCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, '/detail', arguments: tourism);
+        Navigator.pushNamed(context, '/detail', arguments: tourism.id);
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
@@ -19,20 +19,10 @@ class TourismCard extends StatelessWidget {
           spacing: 12,
           children: [
             ConstrainedBox(
-              constraints: BoxConstraints(
-                maxHeight: 80,
-                minHeight: 80,
-                maxWidth: 120,
-                minWidth: 120,
-              ),
+              constraints: BoxConstraints(maxHeight: 80, minHeight: 80, maxWidth: 120, minWidth: 120),
               child: ClipRRect(
                 borderRadius: BorderRadiusGeometry.all(Radius.circular(4)),
-                child: Image.network(
-                  tourism.image,
-                  width: 120,
-                  height: 80,
-                  fit: BoxFit.cover,
-                ),
+                child: Image.network(tourism.image, width: 120, height: 80, fit: BoxFit.cover),
               ),
             ),
 
@@ -42,11 +32,7 @@ class TourismCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text(
-                    tourism.name,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(fontSize: 16),
-                  ),
+                  Text(tourism.name, overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: 16)),
                   Row(
                     spacing: 4,
                     children: [
@@ -58,10 +44,7 @@ class TourismCard extends StatelessWidget {
                     spacing: 4,
                     children: [
                       Icon(Icons.favorite, color: Colors.pink, size: 16),
-                      Text(
-                        tourism.like.toString(),
-                        overflow: TextOverflow.ellipsis,
-                      ),
+                      Text(tourism.like.toString(), overflow: TextOverflow.ellipsis),
                     ],
                   ),
                 ],

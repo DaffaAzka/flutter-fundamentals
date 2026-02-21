@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => MainScreen(),
         '/card': (context) => HomeScreen(),
-        '/detail': (context) => DetailScreen(data: ModalRoute.of(context)?.settings.arguments as Tourism),
+        '/detail': (context) => DetailScreen(index: ModalRoute.of(context)?.settings.arguments as int),
       },
     );
   }
